@@ -17,14 +17,28 @@ class Battlefield:
         turn_counter = 0
         while not done:
             dice_roll = self.dice_roll()
-            for dino in self.herd.dinosaur_list:
-                dice_roll = self.dice_roll()
-                if dice_roll>3:
-                    self.dino_turn(dino)
-            for robo in self.fleet.robot_list:
-                dice_roll = self.dice_roll()
-                if dice_roll<4:
-                    self.robo_turn(robo)        
+            if dice_roll>3:
+                for dino in self.herd.dinosaur_list:
+                    dice_roll = self.dice_roll()
+                    if dice_roll>3:
+                        self.dino_turn(dino)            
+                for robo in self.fleet.robot_list:
+                    dice_roll = self.dice_roll()
+                    if dice_roll<4:
+                        self.robo_turn(robo)        
+            else:
+                for robo in self.fleet.robot_list:
+                    dice_roll = self.dice_roll()
+                    if dice_roll<4:
+                        self.robo_turn(robo)
+                for dino in self.herd.dinosaur_list:
+                    dice_roll = self.dice_roll()
+                    if dice_roll>3:
+                        self.dino_turn(dino)            
+            done = self.check_forces()
+            turn_counter += 1
+            print("End of turn: ", turn_counter)                     
+
 
     def dino_turn(self,dinosaur):
         dinosaur.attack(self.fleet.robot_list[random.randint(0,len(self.fleet.robot_list)-1)])
