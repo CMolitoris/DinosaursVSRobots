@@ -28,4 +28,11 @@ class Battlefield:
         pass
 
     def display_winners(self):
-        pass
+        if len(self.fleet.robot_list)==0:
+            pass
+        else:
+            pass
+
+    def check_forces(self):
+        if len(self.fleet.robot_list)==0 or len(self.herd.dinosaur_list)==0:
+            self.display_winners()
