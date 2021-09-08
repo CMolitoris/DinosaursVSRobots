@@ -1,4 +1,6 @@
+from math import fabs
 import Herd,Fleet
+import random
 
 class Battlefield:
     def __init__(self):
@@ -13,13 +15,15 @@ class Battlefield:
         + "Welcome to the 3D combat simulator where your fighting dreams become reality!")
 
     def battle(self):
-        pass
+        done = False
+        while not done:
+            
 
     def dino_turn(self,dinosaur):
-        pass
+        dinosaur.attack(self.fleet.robot_list[random.randint(0,len(self.fleet.robot_list)-1)])
 
     def robo_turn(self,robot):
-        pass
+        robot.attack(self.herd.dinosaur_list[random.randint(0,len(self.herd.dinosaur_list)-1)])
 
     def show_dino_opponent_options(self):
         pass
@@ -37,7 +41,12 @@ class Battlefield:
             print("The robots have won the battle!")
             for robo in self.fleet.robot_list:
                 print(robo.name + " has survived the battle!")
+        return True        
 
     def check_forces(self):
         if len(self.fleet.robot_list)==0 or len(self.herd.dinosaur_list)==0:
-            self.display_winners()
+            return self.display_winners()
+        return False    
+
+    def dice_roll(self):
+        return random.randint(1,6)        
