@@ -3,7 +3,7 @@ class Dinosaur:
         self.name = name
         self.health = 100
         self.attack_power = 35
-        self.stamina = 30
+        self.stamina = 20
         self.attack_set = ["Stomp","Maul","Thrash"]
 
     def attack(self,robot):
@@ -14,8 +14,9 @@ class Dinosaur:
             if robot.health<=0:
                 print(robot.name + " has been defeated!")
                 del robot
+            self.stamina -= 10
         else:
             print(self.name + " does not have enough stamina to attack")
-            
+
     def get_attacks(self):
         return self.attack_set    

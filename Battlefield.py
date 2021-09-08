@@ -6,11 +6,11 @@ class Battlefield:
     def __init__(self):
         self.herd = Herd()
         self.fleet = Fleet()
-
+        self.commence_battle()
 
     def display_welcome(self):
         print("________________________________________________________________________________\n"
-        + "\tWelcome to the 3D combat simulator where your fighting dreams become reality!")
+        + "\tWelcome to the 3D combat simulator where your fighting dreams become reality")
 
     def battle(self):
         done = False
@@ -37,7 +37,9 @@ class Battlefield:
                         self.dino_turn(dino)            
             done = self.check_forces()
             turn_counter += 1
-            print("End of turn: ", turn_counter)                     
+            print("End of turn: ", turn_counter)
+            if turn_counter%2==0:
+                self.refresh()                     
 
 
     def dino_turn(self,dinosaur):
@@ -46,8 +48,8 @@ class Battlefield:
     def robo_turn(self,robot):
         robot.attack(self.herd.dinosaur_list[random.randint(0,len(self.herd.dinosaur_list)-1)])
 
-    def show_dino_opponent_options(self):
-        pass
+    def show_dino_opponent_options(self,dinosaur):
+        attack_list = dinosaur.get_attacks()
 
     def show_robo_opponent_options(self):
         pass
@@ -76,3 +78,9 @@ class Battlefield:
         print("Battlefield sequence initiating..")
         self.display_welcome()
         self.battle()
+
+    def refresh(self):
+        for dino in self.herd.dinosaur_list:
+            dino.stamina = 20
+        for robo in self.fleet.robot_list:
+            robo.power = 20    
