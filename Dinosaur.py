@@ -4,11 +4,11 @@ class Dinosaur:
         self.health = 100
         self.attack_power = 35
         self.stamina = 20
-        self.attack_set = ["Stomp","Maul","Thrash"]
+        self.attack_set = ("Maul","Thrash","Stomp")
 
-    def attack(self,robot):
+    def attack(self,robot,attack_bonus=0):
         if self.stamina>=10:
-            damage = self.attack_power
+            damage = self.attack_power + attack_bonus
             robot.health -= damage
             print(self.name + " is attacking! (Loud dinosaur noises!) " + self.name + " has inflicted " + str(damage) + " points of damage. (" + str(robot.health) + " remaining)")  
             if robot.health<=0:

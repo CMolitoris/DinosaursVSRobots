@@ -50,6 +50,8 @@ class Battlefield:
 
     def show_dino_opponent_options(self,dinosaur):
         attack_list = dinosaur.get_attacks()
+        #-- User input can be implemented here --#
+        return attack_list[random.randint(1,3)]
 
     def show_robo_opponent_options(self):
         pass
