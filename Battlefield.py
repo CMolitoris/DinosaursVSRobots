@@ -29,9 +29,14 @@ class Battlefield:
 
     def display_winners(self):
         if len(self.fleet.robot_list)==0:
-            pass
+            print("The dinosaurs have emerged victorious!")
+            for dino in self.herd.dinosaur_list:
+                print(dino.name + " has survived the battle!")
+                
         else:
-            pass
+            print("The robots have won the battle!")
+            for robo in self.fleet.robot_list:
+                print(robo.name + " has survived the battle!")
 
     def check_forces(self):
         if len(self.fleet.robot_list)==0 or len(self.herd.dinosaur_list)==0:
