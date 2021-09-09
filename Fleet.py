@@ -2,7 +2,7 @@ from Weapon import Weapon
 from Robot import Robot
 
 
-import Robot
+from Robot import Robot
 
 class Fleet:
     def __init__(self):
@@ -12,14 +12,15 @@ class Fleet:
     def create_fleet(self):
         counter = 0
         num_robots = 3 #input("How many robots should report to the fleet?")
-        print("Robot Architect begins factory constructrion!")
+        print("\nRobot Architect begins factory construction!")
         while counter<num_robots:
             if counter == 0:
-                self.robot_list.append(Robot("Robot Titan",Weapon("Super-Laser Cannon",75)))
+                self.robot_list.append(Robot("Robot Titan"))
                 print(self.robot_list[counter].name + " has been built!")
                 counter += 1
             else:
-                self.robot_list.append(Robot("Robot New-Build"+counter,Weapon("Shrapnel Launcher",40))) 
+                self.robot_list.append(Robot("Robot New-Build"+str(counter))) 
                 print(self.robot_list[counter].name + " has been built!")   
                 counter += 1
+            print("\n")    
                 

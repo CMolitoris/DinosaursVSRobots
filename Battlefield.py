@@ -1,16 +1,23 @@
 from math import fabs
-import Herd,Fleet
+from typing import Text
+from Herd import Herd
+from Fleet import Fleet
+import time
 import random
 
 class Battlefield:
     def __init__(self):
+        self.display_welcome()
         self.herd = Herd()
         self.fleet = Fleet()
         self.commence_battle()
+        
 
     def display_welcome(self):
         print("________________________________________________________________________________\n"
-        + "\tWelcome to the 3D combat simulator where your fighting dreams become reality")
+        + "  Welcome to the 3D combat simulator where your fighting dreams become reality")
+        print("\nBattlefield sequence initiating..")
+        time.sleep(2)
 
     def battle(self):
         done = False
@@ -18,29 +25,38 @@ class Battlefield:
         while not done:
             dice_roll = self.dice_roll()
             if dice_roll>3:
-                for dino in self.herd.dinosaur_list:
-                    dice_roll = self.dice_roll()
-                    if dice_roll>3:
-                        self.dino_turn(dino)            
-                for robo in self.fleet.robot_list:
-                    dice_roll = self.dice_roll()
-                    if dice_roll<4:
-                        self.robo_turn(robo)        
+                self.dino_first()        
             else:
-                for robo in self.fleet.robot_list:
-                    dice_roll = self.dice_roll()
-                    if dice_roll<4:
-                        self.robo_turn(robo)
-                for dino in self.herd.dinosaur_list:
-                    dice_roll = self.dice_roll()
-                    if dice_roll>3:
-                        self.dino_turn(dino)            
+                self.robo_first()            
             done = self.check_forces()
             turn_counter += 1
-            print("End of turn: ", turn_counter)
+            print("End of turn: " + str(turn_counter) + "\n")
             if turn_counter%2==0:
                 self.refresh()                     
 
+    def robo_first(self):
+        for robo in self.fleet.robot_list:
+            dice_roll = self.dice_roll()
+            if dice_roll<4:
+                self.robo_turn(robo)
+            time.sleep(1)    
+        for dino in self.herd.dinosaur_list:
+            dice_roll = self.dice_roll()
+            if dice_roll>3:
+                self.dino_turn(dino)
+            time.sleep(1)
+
+    def dino_first(self):
+        for dino in self.herd.dinosaur_list:
+            dice_roll = self.dice_roll()
+            if dice_roll>3:
+                self.dino_turn(dino) 
+            time.sleep(1)               
+        for robo in self.fleet.robot_list:
+            dice_roll = self.dice_roll()
+            if dice_roll<4:
+                self.robo_turn(robo)   
+            time.sleep(1)              
 
     def dino_turn(self,dinosaur):
         dinosaur.attack(self.fleet.robot_list[random.randint(0,len(self.fleet.robot_list)-1)])
@@ -77,8 +93,6 @@ class Battlefield:
         return random.randint(1,6)        
 
     def commence_battle(self):
-        print("Battlefield sequence initiating..")
-        self.display_welcome()
         self.battle()
 
     def refresh(self):

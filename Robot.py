@@ -3,7 +3,7 @@ from Weapon import Weapon
 
 
 class Robot:
-    def __init__(self,name,weapon):
+    def __init__(self,name):
         self.name = name
         self.health = 200
         self.power = 20
@@ -13,13 +13,13 @@ class Robot:
         if self.power>=10:
             damage = self.weapon.attack_power
             dinosaur.health -= damage
-            print(self.name + " inflicted " + str(damage) + " to " + dinosaur.name + " (" + str(dinosaur.health) + " remaining)")  
+            print(self.name + " inflicted " + str(damage) + " damage to " + dinosaur.name + "! (" + str(dinosaur.health) + " health remaining)\n")  
             if dinosaur.health<=0:
                 print(dinosaur.name + " has been slain!")  
                 del dinosaur
             self.power -= 10
         else:
-            print(self.name + " does not have enough power to attack")        
+            print(self.name + " does not have enough power to attack\n")        
 
     def choose_weapon(self):
         weapon_options = {1:Weapon("Incinerator",35),2:Weapon("Plasma disintegrator",40),3:Weapon("Savo-Launcher",45)}  
