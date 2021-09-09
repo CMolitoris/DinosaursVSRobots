@@ -1,5 +1,4 @@
 from math import fabs
-from typing import Text
 from Herd import Herd
 from Fleet import Fleet
 import time
@@ -59,15 +58,18 @@ class Battlefield:
             time.sleep(1)              
 
     def dino_turn(self,dinosaur):
-        dinosaur.attack(self.fleet.robot_list[random.randint(0,len(self.fleet.robot_list)-1)])
+        attack = self.show_dino_opponent_options()
+        robot = self.fleet.robot_list[random.randint(0,len(self.fleet.robot_list)-1)]
+        dinosaur.attack(robot,attack,self.fleet.robot_list)
 
     def robo_turn(self,robot):
-        robot.attack(self.herd.dinosaur_list[random.randint(0,len(self.herd.dinosaur_list)-1)])
+        dinosaur = self.herd.dinosaur_list[random.randint(0,len(self.herd.dinosaur_list)-1)]
+        robot.attack(dinosaur,self.herd.dinosaur_list)
 
     def show_dino_opponent_options(self,dinosaur):
         attack_list = dinosaur.get_attacks()
         #-- User input can be implemented here --#
-        return attack_list[random.randint(1,3)]
+        return attack_list[random.randint(0,2)]
 
     def show_robo_opponent_options(self):
         pass

@@ -9,14 +9,15 @@ class Robot:
         self.power = 20
         self.weapon = self.choose_weapon()
 
-    def attack(self,dinosaur):
+    def attack(self,dinosaur,dinosaur_list):
         if self.power>=10:
             damage = self.weapon.attack_power
             dinosaur.health -= damage
             print(self.name + " inflicted " + str(damage) + " damage to " + dinosaur.name + "! (" + str(dinosaur.health) + " health remaining)\n")  
             if dinosaur.health<=0:
-                print(dinosaur.name + " has been slain!")  
-                del dinosaur
+                print(dinosaur.name + " has been slain!\n")  
+                index = dinosaur_list.index(dinosaur)
+                dinosaur_list.pop(index)
             self.power -= 10
         else:
             print(self.name + " does not have enough power to attack\n")        
